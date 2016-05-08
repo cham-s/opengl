@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <SDL/SDL.h>
 
+#define SDL_VIDEO_FLAGS (SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_ANYORMAT)
+
 void	put_pixel(SDL_Surface *surface, Uint16 x, Uint16 y, Uint32 color)
 {
 	// nombre de bit par pixel de la surface d'ecran
@@ -32,4 +34,19 @@ void	put_pixel(SDL_Surface *surface, Uint16 x, Uint16 y, Uint32 color)
 
 int main()
 {
+	SDL_Surface *screen;
+	SDL_Surface	*image;
+	SDL_Surface	*tmp;
+	SDL_Rect blitrect = {0, 0, 0, 0};
+	int i;
+	int j;
+
+	if (SDL_Init(SDL_INIT_VIDEO) == -1)
+	{
+		printf("Error with SDL INIT %s", SDL_GetError());
+		return (1);
+	}
+	screen = SDL_SetVideoMode(640, 480, 24, SDL_VIDEO_FLAGS);
+	printf("Mode video: dx%d\n", screen->w, screen->h, screen->format->BitsPerPixel);
+	
 }
